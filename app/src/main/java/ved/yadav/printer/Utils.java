@@ -1,4 +1,4 @@
-package infixsoft.imrankst1221.printer;
+package ved.yadav.printer;
 
 import android.graphics.Bitmap;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package infixsoft.imrankst1221.printer;
+package ved.yadav.printer;
 
 /**
  * Created by ved yadav on 28/07/2019.
@@ -16,7 +16,6 @@ import java.util.Calendar;
 
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,19 +55,21 @@ public class MainActivity extends Activity{
                 printDemo();
             }
         });
+
         btnBill.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 printBill();
             }
         });
-        btnDonate.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_me)));
-                startActivity(browserIntent);
-            }
-        });
+
+//        btnDonate.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_me)));
+//                startActivity(browserIntent);
+//            }
+//        });
 
 //        initAdMob();
     }
@@ -137,7 +138,6 @@ public class MainActivity extends Activity{
 //                printNewLine();
                 printCustom(new String(new char[32]).replace("\0", "_"),0,1);
 
-//                printPhoto(R.drawable.fill_logo);
                 printNewLine();
                 printCustom("Franchise Name:",0,0);
                 printCustom("GSTIN: ",0,0);

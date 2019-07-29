@@ -3,11 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "infixsoft.imrankst1221.printer"
+        applicationId "ved.yadav.printer"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.1.20190104"
+        versionName "1.0.10"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

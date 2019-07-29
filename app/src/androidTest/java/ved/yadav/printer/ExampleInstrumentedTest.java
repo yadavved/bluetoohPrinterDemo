@@ -1,4 +1,4 @@
-package nullpointer.thermal.printer;
+package ved.yadav.printer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

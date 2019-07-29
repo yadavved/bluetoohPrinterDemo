@@ -1,4 +1,4 @@
-package nullpointer.thermal.printer;
+package ved.yadav.printer;
 
 import org.junit.Test;
 
