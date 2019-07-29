@@ -260,6 +260,7 @@ public class DeviceList extends ListActivity {
         connectThread.start();
     }
 
+
     private Runnable socketErrorRunnable = new Runnable() {
 
         @Override
