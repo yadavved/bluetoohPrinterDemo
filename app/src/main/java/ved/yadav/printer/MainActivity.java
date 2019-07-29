@@ -20,17 +20,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
-//import com.google.android.gms.ads.AdListener;
-//import com.google.android.gms.ads.AdRequest;
-//import com.google.android.gms.ads.AdView;
+
 
 public class MainActivity extends Activity{
     private String TAG = "Main Activity";
-    EditText message ;
-    Button btnPrint, btnBill, btnDonate;
-//    AdView viewAdmob;
+    TextView message ;
+    Button btnPrint, btnBill;
 
     byte FONT_TYPE;
     private static BluetoothSocket btsocket;
@@ -40,21 +37,9 @@ public class MainActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        message = (EditText)findViewById(R.id.txtMessage);
+        message = (TextView)findViewById(R.id.txtMessage);
         message.setText("Synergy Print Demo");
-        btnPrint = (Button)findViewById(R.id.btnPrint);
-        btnPrint.setVisibility(View.GONE);
         btnBill = (Button)findViewById(R.id.btnBill);
-        btnDonate = (Button)findViewById(R.id.btnDonate);
-//        viewAdmob = (AdView)findViewById(R.id.view_admob);
-
-        btnPrint.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                printDemo();
-            }
-        });
 
         btnBill.setOnClickListener(new OnClickListener() {
             @Override
@@ -63,44 +48,7 @@ public class MainActivity extends Activity{
             }
         });
 
-//        btnDonate.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paypal_me)));
-//                startActivity(browserIntent);
-//            }
-//        });
-
-//        initAdMob();
     }
-
-//    private void initAdMob() {
-//        final AdRequest adRequest = new AdRequest.Builder()
-//                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//                //.addTestDevice("F901B815E265F8281206A2CC49D4E432")
-//                .build();
-//
-//        viewAdmob.setAdListener(
-//                new AdListener() {
-//                    @Override
-//                    public void onAdLoaded() {
-//                        viewAdmob.setVisibility(View.VISIBLE);
-//                    }
-//
-//                    @Override
-//                    public void onAdFailedToLoad(int errorCode) {
-//                        super.onAdFailedToLoad(errorCode);
-//                        viewAdmob.setVisibility(View.INVISIBLE);
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                viewAdmob.loadAd(adRequest);
-//                            }
-//                        }, 2000);
-//                    }
-//                });
-//        viewAdmob.loadAd(adRequest);
-//    }
 
     protected void printBill() {
         if(btsocket == null){
@@ -214,52 +162,6 @@ public class MainActivity extends Activity{
         }
     }
 
-    protected void printDemo() {
-        if(btsocket == null){
-            Intent BTIntent = new Intent(getApplicationContext(), DeviceList.class);
-            this.startActivityForResult(BTIntent, DeviceList.REQUEST_CONNECT_BT);
-        }
-        else{
-            OutputStream opstream = null;
-            try {
-                opstream = btsocket.getOutputStream();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            outputStream = opstream;
-
-            //print command
-            try {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                outputStream = btsocket.getOutputStream();
-
-                byte[] printformat = { 0x1B, 0*21, FONT_TYPE };
-                //outputStream.write(printformat);
-
-                //print title
-                printUnicode();
-                //print normal text
-                printCustom(message.getText().toString(),0,0);
-                printPhoto(R.drawable.fillnow_2);
-                printNewLine();
-                printText("     >>>>   Thank you  <<<<     "); // total 32 char in a single line
-                //resetPrint(); //reset printer
-                printUnicode();
-                printNewLine();
-                printNewLine();
-
-                outputStream.flush();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //print custom
     private void printCustom(String msg, int size, int align) {
         //Print config "mode"
         byte[] cc = new byte[]{0x1B,0x21,0x03};  // 0- normal size text

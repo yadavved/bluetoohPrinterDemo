@@ -29,7 +29,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class DeviceList extends ListActivity {
-    private static String TAG = "---DeviceList";
+    private static String TAG = "Devices Info";
     public static final int REQUEST_COARSE_LOCATION = 200;
 
     static public final int REQUEST_CONNECT_BT = 0*2300;
@@ -38,10 +38,6 @@ public class DeviceList extends ListActivity {
     static private ArrayAdapter<String> mArrayAdapter = null;
 
     static private ArrayAdapter<BluetoothDevice> btDevices = null;
-
-    private static final UUID SPP_UUID = UUID
-            .fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
-    // UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     static private BluetoothSocket mbtSocket = null;
 
@@ -142,7 +138,7 @@ public class DeviceList extends ListActivity {
         }
 
         Toast.makeText(getApplicationContext(),
-                "Getting all available Bluetooth Devices", Toast.LENGTH_SHORT)
+                "Fecthing All Bluetooth Devices Info", Toast.LENGTH_LONG)
                 .show();
 
         return 0;
@@ -236,15 +232,6 @@ public class DeviceList extends ListActivity {
             public void run() {
                 try {
 
-//                    boolean gotuuid = btDevices.getItem(position)
-//                            .fetchUuidsWithSdp();
-//                    UUID uuid = btDevices.getItem(position).getUuids()[0]
-//                            .getUuid();
-
-
-//                    mbtSocket = btDevices.getItem(position)
-//                            .createRfcommSocketToServiceRecord(uuid);
-
                     mbtSocket = btDevices.getItem(position)
                             .createRfcommSocketToServiceRecord(UUID.fromString("00001101-0000-1000-8000-00805f9b34fb"));
 
@@ -278,7 +265,7 @@ public class DeviceList extends ListActivity {
         @Override
         public void run() {
             Toast.makeText(getApplicationContext(),
-                    "Cannot establish connection", Toast.LENGTH_SHORT).show();
+                    "Error in Connection", Toast.LENGTH_SHORT).show();
             mBluetoothAdapter.startDiscovery();
 
         }

@@ -6,4 +6,4 @@
     android:layout_width="match_parent"
     android:textColor="#607D8B"
     android:padding="10dp"
-    tools:text="Device name" />
+    tools:text="Device Info" />
